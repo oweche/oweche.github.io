@@ -26,6 +26,8 @@
         <a href="#contact" data-nav>Contact</a>
       </div>
       <div class="nav-actions">
+        <button id="command-open" class="header-tool" type="button" aria-haspopup="dialog" aria-controls="command-dialog">Quick nav <kbd>⌘K</kbd></button>
+        <button id="theme-cycle" class="header-tool theme-cycle" type="button" aria-label="Change accent theme">Theme · Acid</button>
         <button id="motion-toggle" class="motion-toggle" type="button" aria-pressed="false" aria-label="Turn motion off">Motion on</button>
         <a class="nav-status" href="mailto:owenchen0408@gmail.com"><span></span> Open to opportunities</a>
       </div>
@@ -39,6 +41,13 @@
           <p class="eyebrow"><span>01</span> Computer engineering · Purdue University</p>
           <h1>I build at the edge of <em>hardware &amp; intelligence.</em></h1>
           <p class="lede">I’m Owen Chen—an engineer interested in semiconductor systems, robotics, embedded control, and the measurement tools that make complex hardware understandable.</p>
+          <div class="focus-switcher" role="group" aria-label="Explore Owen's engineering focus">
+            <span>Focus</span>
+            <button type="button" data-focus="semiconductors" aria-pressed="true">Semiconductors</button>
+            <button type="button" data-focus="robotics" aria-pressed="false">Robotics</button>
+            <button type="button" data-focus="embedded" aria-pressed="false">Embedded</button>
+          </div>
+          <p id="focus-status" class="focus-status" aria-live="polite">Characterization, metrology, and reliability.</p>
           <div class="hero-actions">
             <a class="button-primary" href="#work" data-magnetic>Explore the systems <span aria-hidden="true">↘</span></a>
             <a class="button-quiet" href="https://github.com/oweche" target="_blank" rel="noreferrer" data-magnetic>GitHub <span aria-hidden="true">↗</span></a>
@@ -97,6 +106,8 @@
           <div class="experience-title"><h3>Summer Undergraduate Research Fellow</h3><p>Birck Nanotechnology Center · Purdue University</p></div>
           <p class="experience-summary">Building repeatable measurement systems for electronic component analysis, spanning optical spectroscopy, laser profilometry, and Python-based statistical pipelines.</p>
           <div class="experience-meta"><span>2026 — Present</span><div><small>Metrology</small><small>Python</small><small>Surface analysis</small></div></div>
+          <button class="experience-toggle" type="button" aria-expanded="false" aria-controls="experience-detail-1">Details <span aria-hidden="true">+</span></button>
+          <div id="experience-detail-1" class="experience-detail" hidden><strong>Current signal</strong><p>Standardized UV-Vis-NIR and laser-profilometry workflows across 30 ESP32-based development boards from five suppliers, with Python pipelines for supplier-level comparison.</p></div>
         </article>
         <article class="experience-row" data-reveal>
           <span class="experience-number">02</span>
@@ -104,6 +115,8 @@
           <div class="experience-title"><h3>Engineering Intern</h3><p>Serelix Robotics</p></div>
           <p class="experience-summary">Designed a tunable 3D-printed foot interface and a nine-channel pressure-sensing PCB for a post-stroke rehabilitation exoskeleton.</p>
           <div class="experience-meta"><span>Summer 2025</span><div><small>KiCad</small><small>PCB design</small><small>Rapid prototyping</small></div></div>
+          <button class="experience-toggle" type="button" aria-expanded="false" aria-controls="experience-detail-2">Details <span aria-hidden="true">+</span></button>
+          <div id="experience-detail-2" class="experience-detail" hidden><strong>Current signal</strong><p>Created a parametric TPU foot interface with region-specific lattice geometry and a nine-channel ADS124S08 pressure-sensing PCB.</p></div>
         </article>
         <article class="experience-row" data-reveal>
           <span class="experience-number">03</span>
@@ -111,6 +124,8 @@
           <div class="experience-title"><h3>UROP Researcher</h3><p>Taipei Tech × MIT City Science Lab</p></div>
           <p class="experience-summary">Built a wheeled-bipedal robot that could dock into a quadruped, then developed its kinematics, control simulations, and power/CAN distribution board.</p>
           <div class="experience-meta"><span>2024 — 2025</span><div><small>Robotics</small><small>Control systems</small><small>CAN bus</small></div></div>
+          <button class="experience-toggle" type="button" aria-expanded="false" aria-controls="experience-detail-3">Details <span aria-hidden="true">+</span></button>
+          <div id="experience-detail-3" class="experience-detail" hidden><strong>Current signal</strong><p>Implemented inverse kinematics and simulated LQR and MPC strategies in MuJoCo, then designed the two-layer power and CAN-bus distribution PCB.</p></div>
         </article>
         <article class="experience-row" data-reveal>
           <span class="experience-number">04</span>
@@ -118,6 +133,8 @@
           <div class="experience-title"><h3>Electronics Team Member</h3><p>Purdue Formula SAE</p></div>
           <p class="experience-summary">Developing electronic throttle-body control logic and validation procedures for a MoTeC M150 ECU, plus wiring harnesses for a custom Yamaha R6 engine-dynamometer setup.</p>
           <div class="experience-meta"><span>2025 — Present</span><div><small>ECU</small><small>Validation</small><small>Harnesses</small></div></div>
+          <button class="experience-toggle" type="button" aria-expanded="false" aria-controls="experience-detail-4">Details <span aria-hidden="true">+</span></button>
+          <div id="experience-detail-4" class="experience-detail" hidden><strong>Current signal</strong><p>Working on throttle-body control logic, validation procedures, and documented engine-dynamometer wiring around a MoTeC M150 and Yamaha R6.</p></div>
         </article>
       </div>
     </section>
@@ -143,20 +160,20 @@
         </div>
         <div class="project-grid">
           <article class="project-card feature-card" data-category="robotics hardware" data-reveal data-tilt>
-            <div class="project-image"><img src="assets/photos/robot-city.jpg" alt="Bipedal city transport robot on a test rig in the lab" width="1600" height="1200" loading="lazy"><span>A / 04</span></div>
-            <div class="project-content"><p class="project-label">Robotics · Control</p><h3>Bipedal city transport robot</h3><p>A modular wheeled-bipedal platform designed to dock into a more stable quadruped system.</p><button type="button" data-project="bipedal" data-magnetic>Open field notes <span aria-hidden="true">↗</span></button></div>
+            <div class="project-image"><img src="assets/photos/robot-city.jpg" alt="Bipedal city transport robot on a test rig in the lab" width="1600" height="1200" loading="lazy"><span>A / 04</span><button class="photo-open" type="button" data-photo="assets/photos/robot-city.jpg" data-caption="Bipedal city transport robot on a test rig">Expand photo</button></div>
+            <div class="project-content"><p class="project-label">Robotics · Control</p><h3>Bipedal city transport robot</h3><p>A modular wheeled-bipedal platform designed to dock into a more stable quadruped system.</p><div class="project-actions"><button type="button" data-project="bipedal" data-magnetic>Open field notes <span aria-hidden="true">↗</span></button><button class="compare-toggle" type="button" data-compare="bipedal" aria-pressed="false">Compare <span aria-hidden="true">+</span></button></div></div>
           </article>
           <article class="project-card" data-category="robotics hardware" data-reveal data-tilt>
-            <div class="project-image"><img src="assets/photos/robot-prototype.jpg" alt="Close-up of Owen's white bipedal robot prototype on a workbench" width="900" height="1200" loading="lazy"><span>B / 04</span></div>
-            <div class="project-content"><p class="project-label">Prototype · Mechatronics</p><h3>Bipedal prototype</h3><p>A compact build for fast iteration on geometry, actuation, electronics, and control.</p><button type="button" data-project="prototype" data-magnetic>Open field notes <span aria-hidden="true">↗</span></button></div>
+            <div class="project-image"><img src="assets/photos/robot-prototype.jpg" alt="Close-up of Owen's white bipedal robot prototype on a workbench" width="900" height="1200" loading="lazy"><span>B / 04</span><button class="photo-open" type="button" data-photo="assets/photos/robot-prototype.jpg" data-caption="Compact bipedal prototype on the workbench">Expand photo</button></div>
+            <div class="project-content"><p class="project-label">Prototype · Mechatronics</p><h3>Bipedal prototype</h3><p>A compact build for fast iteration on geometry, actuation, electronics, and control.</p><div class="project-actions"><button type="button" data-project="prototype" data-magnetic>Open field notes <span aria-hidden="true">↗</span></button><button class="compare-toggle" type="button" data-compare="prototype" aria-pressed="false">Compare <span aria-hidden="true">+</span></button></div></div>
           </article>
           <article class="project-card cleanroom-card" data-category="research hardware" data-reveal data-tilt>
-            <div class="project-image"><img src="assets/photos/cleanroom.jpg" alt="Owen Chen and a colleague in cleanroom PPE beside semiconductor imaging equipment" width="1582" height="1187" loading="lazy"><span>C / 04</span></div>
-            <div class="project-content"><p class="project-label">Characterization · Research</p><h3>Semiconductor reliability</h3><p>Accelerated-aging studies for power MOSFETs with spectroscopy and laser profilometry.</p><button type="button" data-project="semiconductor" data-magnetic>Open field notes <span aria-hidden="true">↗</span></button></div>
+            <div class="project-image"><img src="assets/photos/cleanroom.jpg" alt="Owen Chen and a colleague in cleanroom PPE beside semiconductor imaging equipment" width="1582" height="1187" loading="lazy"><span>C / 04</span><button class="photo-open" type="button" data-photo="assets/photos/cleanroom.jpg" data-caption="Cleanroom characterization work beside semiconductor imaging equipment">Expand photo</button></div>
+            <div class="project-content"><p class="project-label">Characterization · Research</p><h3>Semiconductor reliability</h3><p>Accelerated-aging studies for power MOSFETs with spectroscopy and laser profilometry.</p><div class="project-actions"><button type="button" data-project="semiconductor" data-magnetic>Open field notes <span aria-hidden="true">↗</span></button><button class="compare-toggle" type="button" data-compare="semiconductor" aria-pressed="false">Compare <span aria-hidden="true">+</span></button></div></div>
           </article>
           <article class="project-card feature-card" data-category="robotics hardware" data-reveal data-tilt>
-            <div class="project-image"><img src="assets/photos/ftc-team.jpg" alt="FTC Team 16021 Techno Maniacs with their competition robot and trophy" width="1600" height="1200" loading="lazy"><span>D / 04</span></div>
-            <div class="project-content"><p class="project-label">Competition · Leadership</p><h3>Techno Maniacs 16021</h3><p>Mechanical and controls integration for a specialized scoring system built to compete.</p><button type="button" data-project="ftc" data-magnetic>Open field notes <span aria-hidden="true">↗</span></button></div>
+            <div class="project-image"><img src="assets/photos/ftc-team.jpg" alt="FTC Team 16021 Techno Maniacs with their competition robot and trophy" width="1600" height="1200" loading="lazy"><span>D / 04</span><button class="photo-open" type="button" data-photo="assets/photos/ftc-team.jpg" data-caption="FTC Team 16021 with its competition robot and trophy">Expand photo</button></div>
+            <div class="project-content"><p class="project-label">Competition · Leadership</p><h3>Techno Maniacs 16021</h3><p>Mechanical and controls integration for a specialized scoring system built to compete.</p><div class="project-actions"><button type="button" data-project="ftc" data-magnetic>Open field notes <span aria-hidden="true">↗</span></button><button class="compare-toggle" type="button" data-compare="ftc" aria-pressed="false">Compare <span aria-hidden="true">+</span></button></div></div>
           </article>
         </div>
       </div>
@@ -166,6 +183,18 @@
       <div class="section-heading" data-reveal>
         <div><span class="section-code">/ 03</span><h2>Toolchain</h2></div>
         <p>Code, circuits, CAD, controls, metrology, and the instruments that connect them.</p>
+      </div>
+      <div class="tool-controls" data-reveal>
+        <label class="tool-search"><span class="sr-only">Search tools</span><input id="tool-search" type="search" placeholder="Search 39 tools…" autocomplete="off"></label>
+        <div class="tool-filters" role="group" aria-label="Filter toolchain">
+          <button type="button" data-tool-filter="all" aria-pressed="true">All</button>
+          <button type="button" data-tool-filter="code" aria-pressed="false">Code</button>
+          <button type="button" data-tool-filter="controls" aria-pressed="false">Controls</button>
+          <button type="button" data-tool-filter="cad" aria-pressed="false">CAD</button>
+          <button type="button" data-tool-filter="hardware" aria-pressed="false">Hardware</button>
+          <button type="button" data-tool-filter="metrology" aria-pressed="false">Metrology</button>
+        </div>
+        <button id="tool-speed" class="tool-speed" type="button" aria-label="Change tool rail speed">Rail · Normal</button>
       </div>
       <div class="logo-loop" data-reveal aria-label="Selected engineering tools">
         <div class="logo-track logo-track-forward">
@@ -213,6 +242,7 @@
           </div>
         </div>
       </div>
+      <aside id="tool-detail" class="tool-detail" aria-live="polite"><span>Select a tool</span><strong>Inspect the stack</strong><p>Click or focus a tool to see where it fits.</p></aside>
       <div class="education-card" data-reveal>
         <div class="education-orbit" aria-hidden="true"><i></i><b></b></div>
         <div><span class="education-mark"><img src="assets/logos/purdue-official.png" alt="Purdue University"></span><div><p>B.S. Computer Engineering</p><h3>Purdue University</h3></div></div>
@@ -233,6 +263,34 @@
       <div class="footer-bottom"><span>© 2026 Owen Chen</span><div><a href="https://github.com/oweche" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/owen-chen-aab061216/" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="https://owenchen.org" target="_blank" rel="noreferrer">Archive ↗</a></div></div>
     </div>
   </footer>
+
+  <button id="back-to-top" class="back-to-top" type="button" aria-label="Back to top">↑</button>
+  <div id="compare-tray" class="compare-tray" hidden aria-live="polite">
+    <div><span>Compare projects</span><strong id="compare-selection">Choose two projects</strong></div>
+    <button id="compare-clear" type="button">Clear</button>
+    <button id="compare-open" type="button" disabled>Compare</button>
+  </div>
+
+  <dialog id="command-dialog" class="command-dialog" aria-labelledby="command-title">
+    <form method="dialog"><button class="dialog-close" aria-label="Close quick navigation">Close ×</button></form>
+    <div class="command-inner">
+      <p class="project-label">Keyboard / navigation</p>
+      <h2 id="command-title">Go somewhere useful.</h2>
+      <label><span class="sr-only">Search destinations</span><input id="command-search" type="search" placeholder="Type a section or project…" autocomplete="off"></label>
+      <div id="command-results" class="command-results">
+        <a href="#experience" data-command-label="experience research internships">Experience <span>01</span></a>
+        <a href="#work" data-command-label="work projects systems robotics semiconductor">Selected systems <span>02</span></a>
+        <a href="#toolchain" data-command-label="toolchain skills software hardware cad">Toolchain <span>03</span></a>
+        <a href="#contact" data-command-label="contact email">Contact <span>04</span></a>
+      </div>
+      <p class="command-hint"><kbd>↑</kbd><kbd>↓</kbd> navigate · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</p>
+    </div>
+  </dialog>
+
+  <dialog id="photo-dialog" class="photo-dialog" aria-labelledby="photo-caption">
+    <button id="photo-close" class="dialog-close" type="button" aria-label="Close enlarged photo">Close ×</button>
+    <figure><img id="photo-image" src="assets/photos/robot-city.jpg" alt=""><figcaption id="photo-caption"></figcaption></figure>
+  </dialog>
 
   <dialog id="project-dialog">
     <button id="dialog-close" class="dialog-close" type="button" aria-label="Close project details">Close ×</button>
