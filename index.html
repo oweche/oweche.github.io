@@ -1,12 +1,68 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Owen Chen</title>
+  <meta name="description" content="Portfolio of Owen Chen, a Purdue computer engineering student working across semiconductor research, robotics, embedded systems, and hardware validation.">
+  <title>Owen Chen — Computer Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Owen Chen</h1>
-  <p>My website is working!</p>
+  <nav class="nav shell" aria-label="Primary navigation">
+    <a class="wordmark" href="#top" aria-label="Owen Chen, home"><span>OC</span><i></i></a>
+    <div class="nav-links"><a href="#work">Work</a><a href="#experience">Experience</a><a href="#contact">Contact</a></div>
+    <a class="nav-status" href="mailto:owenchen0408@gmail.com"><span></span> Open to opportunities</a>
+  </nav>
+
+  <main>
+    <section id="top" class="hero shell">
+      <div class="hero-copy">
+        <p class="eyebrow">Computer engineering · Purdue University</p>
+        <h1>I build at the edge of<em> hardware &amp; intelligence.</em></h1>
+        <p class="lede">I’m Owen Chen—an engineer interested in semiconductor systems, robotics, embedded control, and the measurement tools that make complex hardware understandable.</p>
+        <div class="hero-actions">
+          <a class="button-primary" href="#work">Explore my work <span>→</span></a>
+          <a class="button-quiet" href="https://github.com/oweche" target="_blank" rel="noreferrer">GitHub ↗</a>
+        </div>
+      </div>
+      <div class="circuit-field" aria-hidden="true">
+        <div class="chip"><span class="chip-kicker">SYSTEM</span><strong>OC / 26</strong><small>DESIGN · TEST · ITERATE</small></div>
+        <span class="trace trace-one"></span><span class="trace trace-two"></span><span class="trace trace-three"></span><span class="trace trace-four"></span>
+        <span class="node node-one"></span><span class="node node-two"></span><span class="node node-three"></span><span class="signal">01 10 01 11 00 10</span>
+      </div>
+      <div class="hero-foot"><span>BASED IN WEST LAFAYETTE, IN</span><span>ENGLISH / 中文</span><span class="scroll-cue">SCROLL TO TRACE THE SIGNAL ↓</span></div>
+    </section>
+
+    <section class="manifesto shell" aria-label="Engineering approach"><span class="section-code">/ 00</span><p>From a <strong>sensor trace</strong> to a <strong>robot in motion</strong>, I like engineering problems where careful measurement meets decisive making.</p></section>
+
+    <section id="experience" class="section shell">
+      <div class="section-heading"><div><span class="section-code">/ 01</span><h2>Experience</h2></div><p>Research, hardware, and systems that leave the bench.</p></div>
+      <div class="experience-list">
+        <article class="experience-row"><span class="experience-number">01</span><div class="experience-title"><h3>Summer Undergraduate Research Fellow</h3><p>Birck Nanotechnology Center · Purdue University</p></div><p class="experience-summary">Building repeatable measurement systems for supplier-level electronic component analysis, spanning optical spectroscopy, laser profilometry, and Python-based statistical pipelines.</p><div class="experience-meta"><span>2026 — Present</span><div><small>Metrology</small><small>Python</small><small>Surface analysis</small></div></div></article>
+        <article class="experience-row"><span class="experience-number">02</span><div class="experience-title"><h3>Engineering Intern</h3><p>Serelix Robotics</p></div><p class="experience-summary">Designed a tunable 3D-printed foot interface and a nine-channel pressure-sensing PCB for a post-stroke rehabilitation exoskeleton.</p><div class="experience-meta"><span>Summer 2025</span><div><small>KiCad</small><small>PCB design</small><small>Rapid prototyping</small></div></div></article>
+        <article class="experience-row"><span class="experience-number">03</span><div class="experience-title"><h3>UROP Researcher</h3><p>Taipei Tech × MIT City Science Lab</p></div><p class="experience-summary">Built a wheeled-bipedal robot that could dock into a quadruped, then developed its kinematics, control simulations, and power/CAN distribution board.</p><div class="experience-meta"><span>2024 — 2025</span><div><small>Robotics</small><small>Control systems</small><small>CAN bus</small></div></div></article>
+      </div>
+    </section>
+
+    <section id="work" class="projects-section"><div class="shell">
+      <div class="section-heading inverted"><div><span class="section-code">/ 02</span><h2>Selected systems</h2></div><p>Three threads in the work so far.</p></div>
+      <div class="project-grid">
+        <article class="project-card"><div class="project-topline"><span>A</span><span>◇</span></div><p class="project-label">Characterization</p><h3>Semiconductor reliability</h3><p>Accelerated-aging studies for power MOSFETs using source-measure units, spectroscopy, and laser profilometry—with procedures aligned to AEC-Q101.</p><div class="project-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></article>
+        <article class="project-card"><div class="project-topline"><span>B</span><span>◇</span></div><p class="project-label">Embedded systems</p><h3>Formula SAE electronics</h3><p>Electronic throttle-body control logic, validation procedures, and custom engine-dynamometer wiring for Purdue Formula SAE.</p><div class="project-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></article>
+        <article class="project-card"><div class="project-topline"><span>C</span><span>◇</span></div><p class="project-label">Mechatronics</p><h3>Competitive robotics</h3><p>Mechanical and controls integration for a specialized scoring system, plus CNC-machined drivetrain and scoring components.</p><div class="project-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></article>
+      </div>
+    </div></section>
+
+    <section class="section shell toolchain">
+      <div class="section-heading"><div><span class="section-code">/ 03</span><h2>Toolchain</h2></div><p>Comfortable moving between code, circuits, and physical systems.</p></div>
+      <div class="skill-marquee" aria-label="Technical skills"><span><b>01</b> Python</span><span><b>02</b> C++</span><span><b>03</b> SystemVerilog</span><span><b>04</b> MATLAB</span><span><b>05</b> KiCad</span><span><b>06</b> ROS 2</span><span><b>07</b> STM32</span><span><b>08</b> ESP32</span><span><b>09</b> LTspice</span><span><b>10</b> SolidWorks</span><span><b>11</b> MuJoCo</span><span><b>12</b> OpenCV</span></div>
+      <div class="education-card"><div><span class="education-mark">P</span><div><p>B.S. Computer Engineering</p><h3>Purdue University</h3></div></div><p>Dean’s List &amp; Semester Honors · Expected May 2028</p></div>
+    </section>
+  </main>
+
+  <footer id="contact"><div class="shell footer-inner"><p class="eyebrow">Let’s make something measurable.</p><h2>Have a hard problem?</h2><a class="footer-email" href="mailto:owenchen0408@gmail.com">owenchen0408@gmail.com ↗</a><div class="footer-bottom"><span>© 2026 Owen Chen</span><div><a href="https://github.com/oweche" target="_blank" rel="noreferrer">⌘ GitHub</a><a href="https://www.linkedin.com/in/owen-chen-aab061216/" target="_blank" rel="noreferrer">◎ LinkedIn</a><a href="mailto:owenchen0408@gmail.com">✉ Email</a></div></div></div></footer>
 </body>
 </html>
