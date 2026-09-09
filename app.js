@@ -32,6 +32,22 @@
   if (reducedMotion.addEventListener) reducedMotion.addEventListener('change', syncMotionPreference);
   else reducedMotion.addListener(syncMotionPreference);
 
+  const transientAnimations = new Set();
+  function playMotion(element, keyframes, options) {
+    if (motionPaused || !element || typeof element.animate !== 'function') return null;
+    const animation = element.animate(keyframes, options);
+    transientAnimations.add(animation);
+    const release = () => transientAnimations.delete(animation);
+    animation.addEventListener('finish', release, { once: true });
+    animation.addEventListener('cancel', release, { once: true });
+    return animation;
+  }
+  motionListeners.add(paused => {
+    if (!paused) return;
+    transientAnimations.forEach(animation => animation.cancel());
+    transientAnimations.clear();
+  });
+
   function setupLogoLoops() {
     document.querySelectorAll('.logo-track').forEach(track => {
       const group = track.querySelector('.logo-group');
@@ -105,6 +121,7 @@
 
   function setupScrollMotion() {
     const bar = document.querySelector('.scroll-progress span');
+    const header = document.querySelector('.site-header');
     let previousY = window.scrollY;
     let queued = false;
     function update() {
@@ -112,6 +129,7 @@
       const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
       const progress = Math.min(1, Math.max(0, window.scrollY / max));
       if (bar) bar.style.transform = `scaleX(${progress})`;
+      header?.classList.toggle('is-condensed', window.scrollY > 56);
       const delta = Math.abs(window.scrollY - previousY);
       root.style.setProperty('--flow-speed', `${Math.max(12, 28 - Math.min(delta, 16))}s`);
       previousY = window.scrollY;
@@ -162,7 +180,12 @@
   function setupTiltCards() {
     if (!finePointer.matches) return;
     document.querySelectorAll('[data-tilt]').forEach(card => {
-      const reset = () => { card.style.setProperty('--tilt-x', '0deg'); card.style.setProperty('--tilt-y', '0deg'); };
+      const reset = () => {
+        card.style.setProperty('--tilt-x', '0deg');
+        card.style.setProperty('--tilt-y', '0deg');
+        card.style.setProperty('--spot-x', '50%');
+        card.style.setProperty('--spot-y', '50%');
+      };
       card.addEventListener('pointermove', event => {
         if (motionPaused) return reset();
         const box = card.getBoundingClientRect();
@@ -170,8 +193,28 @@
         const y = (event.clientY - box.top) / box.height - .5;
         card.style.setProperty('--tilt-x', `${(-y * 3.2).toFixed(2)}deg`);
         card.style.setProperty('--tilt-y', `${(x * 4.2).toFixed(2)}deg`);
+        card.style.setProperty('--spot-x', `${((x + .5) * 100).toFixed(1)}%`);
+        card.style.setProperty('--spot-y', `${((y + .5) * 100).toFixed(1)}%`);
       });
       card.addEventListener('pointerleave', reset);
+      motionListeners.add(paused => { if (paused) reset(); });
+    });
+  }
+
+  function setupSurfaceSpotlights() {
+    if (!finePointer.matches) return;
+    document.querySelectorAll('.experience-row').forEach(surface => {
+      const reset = () => {
+        surface.style.setProperty('--spot-x', '50%');
+        surface.style.setProperty('--spot-y', '50%');
+      };
+      surface.addEventListener('pointermove', event => {
+        if (motionPaused) return reset();
+        const box = surface.getBoundingClientRect();
+        surface.style.setProperty('--spot-x', `${(((event.clientX - box.left) / box.width) * 100).toFixed(1)}%`);
+        surface.style.setProperty('--spot-y', `${(((event.clientY - box.top) / box.height) * 100).toFixed(1)}%`);
+      });
+      surface.addEventListener('pointerleave', reset);
       motionListeners.add(paused => { if (paused) reset(); });
     });
   }
@@ -195,9 +238,9 @@
     const button = document.querySelector('#theme-cycle');
     if (!button) return;
     const themes = [
-      { id: 'acid', label: 'Acid' },
-      { id: 'cyan', label: 'Cyan' },
-      { id: 'orange', label: 'Orange' },
+      { id: 'navy', label: 'Navy', browser: '#0b1424' },
+      { id: 'steel', label: 'Steel', browser: '#15233a' },
+      { id: 'teal', label: 'Teal', browser: '#102b32' },
     ];
     let index = 0;
     try {
@@ -205,14 +248,22 @@
       const savedIndex = themes.findIndex(theme => theme.id === saved);
       if (savedIndex >= 0) index = savedIndex;
     } catch { /* Theme persistence is optional. */ }
-    function apply() {
+    function apply(animate = false) {
       root.dataset.theme = themes[index].id;
       button.textContent = `Theme · ${themes[index].label}`;
       button.setAttribute('aria-label', `Accent theme: ${themes[index].label}. Activate to change.`);
+      document.querySelector('meta[name="theme-color"]')?.setAttribute('content', themes[index].browser);
+      if (animate) {
+        playMotion(button, [
+          { transform: 'scale(.96)', opacity: .72 },
+          { transform: 'scale(1.03)', opacity: 1, offset: .55 },
+          { transform: 'scale(1)', opacity: 1 },
+        ], { duration: 260, easing: 'ease-out' });
+      }
     }
     button.addEventListener('click', () => {
       index = (index + 1) % themes.length;
-      apply();
+      apply(true);
       try { window.localStorage.setItem('owen-portfolio-theme', themes[index].id); } catch { /* Optional. */ }
     });
     apply();
@@ -232,19 +283,70 @@
       buttons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
       document.querySelector('.hero')?.setAttribute('data-focus-view', focus);
       status.textContent = descriptions[focus] || descriptions.semiconductors;
+      if (!motionPaused) {
+        playMotion(status, [
+          { opacity: .25, transform: 'translateY(4px)' },
+          { opacity: 1, transform: 'none' },
+        ], { duration: 180, easing: 'ease-out' });
+        playMotion(document.querySelector('.portrait-frame img'), [
+          { opacity: .84, transform: 'scale(1.015)' },
+          { opacity: 1, transform: 'scale(1)' },
+        ], { duration: 280, easing: 'ease-out' });
+      }
     }));
   }
 
   function setupExperienceAccordions() {
+    const animations = new WeakMap();
+    const clearStyles = detail => {
+      detail.style.removeProperty('height');
+      detail.style.removeProperty('opacity');
+      detail.style.removeProperty('overflow');
+      detail.style.removeProperty('transform');
+    };
     document.querySelectorAll('.experience-toggle').forEach(button => {
       button.addEventListener('click', () => {
         const detail = document.getElementById(button.getAttribute('aria-controls') || '');
         if (!detail) return;
         const expanded = button.getAttribute('aria-expanded') === 'true';
-        button.setAttribute('aria-expanded', String(!expanded));
-        detail.hidden = expanded;
+        const opening = expanded === false;
+        animations.get(detail)?.cancel();
+        clearStyles(detail);
+        button.setAttribute('aria-expanded', String(opening));
         const marker = button.querySelector('span');
-        if (marker) marker.textContent = expanded ? '+' : '−';
+        if (marker) marker.textContent = opening ? '−' : '+';
+        if (motionPaused || !detail.animate) {
+          detail.hidden = !opening;
+          return;
+        }
+        if (opening) detail.hidden = false;
+        const height = detail.scrollHeight;
+        detail.style.overflow = 'hidden';
+        const animation = detail.animate(opening ? [
+          { height: '0px', opacity: 0, transform: 'translateY(-6px)' },
+          { height: `${height}px`, opacity: 1, transform: 'none' },
+        ] : [
+          { height: `${height}px`, opacity: 1, transform: 'none' },
+          { height: '0px', opacity: 0, transform: 'translateY(-6px)' },
+        ], { duration: 220, easing: 'cubic-bezier(.2,.8,.2,1)' });
+        animations.set(detail, animation);
+        animation.onfinish = () => {
+          if (animations.get(detail) !== animation) return;
+          clearStyles(detail);
+          if (!opening && button.getAttribute('aria-expanded') === 'false') detail.hidden = true;
+          animations.delete(detail);
+        };
+      });
+    });
+    motionListeners.add(paused => {
+      if (!paused) return;
+      document.querySelectorAll('.experience-toggle').forEach(button => {
+        const detail = document.getElementById(button.getAttribute('aria-controls') || '');
+        if (!detail) return;
+        animations.get(detail)?.cancel();
+        animations.delete(detail);
+        clearStyles(detail);
+        detail.hidden = button.getAttribute('aria-expanded') !== 'true';
       });
     });
   }
@@ -443,6 +545,10 @@
         if (categoryNode) categoryNode.textContent = category;
         if (titleNode) titleNode.textContent = label;
         if (descriptionNode) descriptionNode.textContent = descriptions[category] || descriptions.hardware;
+        playMotion(detail, [
+          { opacity: .45, transform: 'translateY(5px)' },
+          { opacity: 1, transform: 'none' },
+        ], { duration: 180, easing: 'ease-out' });
       };
       figure.addEventListener('click', select);
       figure.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); select(); } });
@@ -464,13 +570,50 @@
     const projects = [...document.querySelectorAll('article[data-category]')];
     const count = document.querySelector('#project-count');
     if (!filters.length || !projects.length) return;
+    const animations = new WeakMap();
+    let filterEpoch = 0;
+    let activeFilter = 'all';
+    const matchesFilter = (project, filter) => {
+      const categories = (project.getAttribute('data-category') || '').split(/\s+/);
+      return filter === 'all' || categories.includes(filter);
+    };
     function applyFilter(filter) {
+      activeFilter = filter;
+      const epoch = ++filterEpoch;
       let visible = 0;
-      projects.forEach(project => {
-        const categories = (project.getAttribute('data-category') || '').split(/\s+/);
-        const matches = filter === 'all' || categories.includes(filter);
-        project.hidden = !matches;
-        if (matches) { visible += 1; project.classList.add('is-visible'); }
+      projects.forEach((project, index) => {
+        const matches = matchesFilter(project, filter);
+        animations.get(project)?.cancel();
+        animations.delete(project);
+        if (matches) {
+          const wasHidden = project.hidden;
+          project.hidden = false;
+          visible += 1;
+          project.classList.add('is-visible');
+          if (wasHidden) {
+            const animation = playMotion(project, [
+              { opacity: 0 },
+              { opacity: 1 },
+            ], { duration: 220, delay: Math.min(index * 35, 105), easing: 'ease-out' });
+            if (animation) {
+              animations.set(project, animation);
+              animation.onfinish = () => animations.delete(project);
+            }
+          }
+        } else if (!project.hidden) {
+          const animation = playMotion(project, [
+              { opacity: 1 },
+              { opacity: 0 },
+            ], { duration: 140, easing: 'ease-in' });
+          if (!animation) project.hidden = true;
+          else {
+            animations.set(project, animation);
+            animation.onfinish = () => {
+              if (epoch === filterEpoch) project.hidden = true;
+              animations.delete(project);
+            };
+          }
+        }
       });
       filters.forEach(button => {
         const selected = button.getAttribute('data-filter') === filter;
@@ -480,6 +623,15 @@
       if (count) count.textContent = `${visible} ${visible === 1 ? 'project' : 'projects'}`;
     }
     filters.forEach(button => button.addEventListener('click', () => applyFilter(button.getAttribute('data-filter') || 'all')));
+    motionListeners.add(paused => {
+      if (!paused) return;
+      filterEpoch += 1;
+      projects.forEach(project => {
+        animations.get(project)?.cancel();
+        animations.delete(project);
+        project.hidden = !matchesFilter(project, activeFilter);
+      });
+    });
     applyFilter(filters.find(button => button.getAttribute('aria-pressed') === 'true')?.getAttribute('data-filter') || 'all');
   }
 
@@ -550,6 +702,7 @@
   setupPointerGlow();
   setupParallax();
   setupTiltCards();
+  setupSurfaceSpotlights();
   setupMagneticTargets();
   setupThemeCycle();
   setupFocusSwitcher();
