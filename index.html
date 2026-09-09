@@ -4,65 +4,236 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Portfolio of Owen Chen, a Purdue computer engineering student working across semiconductor research, robotics, embedded systems, and hardware validation.">
+  <meta name="theme-color" content="#0c1413">
   <title>Owen Chen — Computer Engineer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script defer src="app.js"></script>
 </head>
 <body>
-  <nav class="nav shell" aria-label="Primary navigation">
-    <a class="wordmark" href="#top" aria-label="Owen Chen, home"><span>OC</span><i></i></a>
-    <div class="nav-links"><a href="#work">Work</a><a href="#experience">Experience</a><a href="#contact">Contact</a></div>
-    <a class="nav-status" href="mailto:owenchen0408@gmail.com"><span></span> Open to opportunities</a>
-  </nav>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <nav class="nav shell" aria-label="Primary navigation">
+      <a class="wordmark" href="#top" data-nav aria-label="Owen Chen, home"><span>OC</span><i></i></a>
+      <div class="nav-links">
+        <a href="#experience" data-nav>Experience</a>
+        <a href="#signal-lab" data-nav>Signal lab</a>
+        <a href="#work" data-nav>Work</a>
+        <a href="#contact" data-nav>Contact</a>
+      </div>
+      <div class="nav-actions">
+        <button id="motion-toggle" class="motion-toggle" type="button" aria-pressed="false" aria-label="Turn motion off">Motion on</button>
+        <a class="nav-status" href="mailto:owenchen0408@gmail.com"><span></span> Open to opportunities</a>
+      </div>
+    </nav>
+  </header>
 
-  <main>
-    <section id="top" class="hero shell">
-      <div class="hero-copy">
-        <p class="eyebrow">Computer engineering · Purdue University</p>
-        <h1>I build at the edge of<em> hardware &amp; intelligence.</em></h1>
-        <p class="lede">I’m Owen Chen—an engineer interested in semiconductor systems, robotics, embedded control, and the measurement tools that make complex hardware understandable.</p>
-        <div class="hero-actions">
-          <a class="button-primary" href="#work">Explore my work <span>→</span></a>
-          <a class="button-quiet" href="https://github.com/oweche" target="_blank" rel="noreferrer">GitHub ↗</a>
+  <main id="main">
+    <section id="top" class="hero">
+      <div class="hero-grid shell">
+        <div class="hero-copy" data-reveal>
+          <p class="eyebrow"><span>01</span> Computer engineering · Purdue University</p>
+          <h1>I build at the edge of <em>hardware &amp; intelligence.</em></h1>
+          <p class="lede">I’m Owen Chen—an engineer interested in semiconductor systems, robotics, embedded control, and the measurement tools that make complex hardware understandable.</p>
+          <div class="hero-actions">
+            <a class="button-primary" href="#work">Explore the systems <span aria-hidden="true">↘</span></a>
+            <a class="button-quiet" href="https://github.com/oweche" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+
+        <figure class="hero-visual" data-reveal>
+          <div class="portrait-frame">
+            <img src="assets/photos/portrait.jpg" alt="Owen testing a yellow quadruped robot in the MIT City Science Lab" width="1200" height="900" fetchpriority="high">
+            <div class="scan-line" aria-hidden="true"></div>
+            <span class="corner corner-tl" aria-hidden="true"></span>
+            <span class="corner corner-br" aria-hidden="true"></span>
+          </div>
+          <figcaption><span>FIELD NOTE / TAIPEI</span><span>ROBOT SYSTEM TEST</span></figcaption>
+          <div class="floating-chip chip-location"><b>25°02′N</b><small>LAB POSITION</small></div>
+          <div class="floating-chip chip-state"><i></i><b>LIVE</b><small>SYSTEM ONLINE</small></div>
+        </figure>
+
+        <div class="hero-foot">
+          <span>BASED IN WEST LAFAYETTE, IN</span>
+          <span>ENGLISH / 中文</span>
+          <span class="scroll-cue">SCROLL TO TRACE THE SIGNAL ↓</span>
         </div>
       </div>
-      <div class="circuit-field" aria-hidden="true">
-        <div class="chip"><span class="chip-kicker">SYSTEM</span><strong>OC / 26</strong><small>DESIGN · TEST · ITERATE</small></div>
-        <span class="trace trace-one"></span><span class="trace trace-two"></span><span class="trace trace-three"></span><span class="trace trace-four"></span>
-        <span class="node node-one"></span><span class="node node-two"></span><span class="node node-three"></span><span class="signal">01 10 01 11 00 10</span>
+      <div class="ticker" aria-label="Areas of work">
+        <div class="ticker-track">
+          <span>SEMICONDUCTORS</span><i>✦</i><span>ROBOTICS</span><i>✦</i><span>METROLOGY</span><i>✦</i><span>EMBEDDED CONTROL</span><i>✦</i><span>PCB DESIGN</span><i>✦</i>
+          <span aria-hidden="true">SEMICONDUCTORS</span><i aria-hidden="true">✦</i><span aria-hidden="true">ROBOTICS</span><i aria-hidden="true">✦</i><span aria-hidden="true">METROLOGY</span><i aria-hidden="true">✦</i><span aria-hidden="true">EMBEDDED CONTROL</span><i aria-hidden="true">✦</i><span aria-hidden="true">PCB DESIGN</span><i aria-hidden="true">✦</i>
+        </div>
       </div>
-      <div class="hero-foot"><span>BASED IN WEST LAFAYETTE, IN</span><span>ENGLISH / 中文</span><span class="scroll-cue">SCROLL TO TRACE THE SIGNAL ↓</span></div>
     </section>
 
-    <section class="manifesto shell" aria-label="Engineering approach"><span class="section-code">/ 00</span><p>From a <strong>sensor trace</strong> to a <strong>robot in motion</strong>, I like engineering problems where careful measurement meets decisive making.</p></section>
+    <section class="manifesto shell" aria-label="Engineering approach" data-reveal>
+      <span class="section-code">/ 00</span>
+      <p>From a <strong>sensor trace</strong> to a <strong>robot in motion</strong>, I like engineering problems where careful measurement meets decisive making.</p>
+    </section>
+
+    <section class="metrics shell" aria-label="Selected engineering metrics" data-reveal>
+      <article><span data-counter="30">30</span><small>devices characterized</small></article>
+      <article><span data-counter="5">5</span><small>suppliers compared</small></article>
+      <article><span data-counter="25" data-suffix="%">25%</span><small>less point-to-point wiring</small></article>
+      <article><span data-counter="2300" data-prefix="$" data-suffix="+">$2,300+</span><small>raised for autism in motorsports</small></article>
+    </section>
 
     <section id="experience" class="section shell">
-      <div class="section-heading"><div><span class="section-code">/ 01</span><h2>Experience</h2></div><p>Research, hardware, and systems that leave the bench.</p></div>
+      <div class="section-heading" data-reveal>
+        <div><span class="section-code">/ 01</span><h2>Experience</h2></div>
+        <p>Research, hardware, and systems that leave the bench.</p>
+      </div>
       <div class="experience-list">
-        <article class="experience-row"><span class="experience-number">01</span><div class="experience-title"><h3>Summer Undergraduate Research Fellow</h3><p>Birck Nanotechnology Center · Purdue University</p></div><p class="experience-summary">Building repeatable measurement systems for supplier-level electronic component analysis, spanning optical spectroscopy, laser profilometry, and Python-based statistical pipelines.</p><div class="experience-meta"><span>2026 — Present</span><div><small>Metrology</small><small>Python</small><small>Surface analysis</small></div></div></article>
-        <article class="experience-row"><span class="experience-number">02</span><div class="experience-title"><h3>Engineering Intern</h3><p>Serelix Robotics</p></div><p class="experience-summary">Designed a tunable 3D-printed foot interface and a nine-channel pressure-sensing PCB for a post-stroke rehabilitation exoskeleton.</p><div class="experience-meta"><span>Summer 2025</span><div><small>KiCad</small><small>PCB design</small><small>Rapid prototyping</small></div></div></article>
-        <article class="experience-row"><span class="experience-number">03</span><div class="experience-title"><h3>UROP Researcher</h3><p>Taipei Tech × MIT City Science Lab</p></div><p class="experience-summary">Built a wheeled-bipedal robot that could dock into a quadruped, then developed its kinematics, control simulations, and power/CAN distribution board.</p><div class="experience-meta"><span>2024 — 2025</span><div><small>Robotics</small><small>Control systems</small><small>CAN bus</small></div></div></article>
+        <article class="experience-row" data-reveal>
+          <span class="experience-number">01</span>
+          <div class="organization-mark purdue-mark" aria-label="Purdue University">PURDUE</div>
+          <div class="experience-title"><h3>Summer Undergraduate Research Fellow</h3><p>Birck Nanotechnology Center · Purdue University</p></div>
+          <p class="experience-summary">Building repeatable measurement systems for electronic component analysis, spanning optical spectroscopy, laser profilometry, and Python-based statistical pipelines.</p>
+          <div class="experience-meta"><span>2026 — Present</span><div><small>Metrology</small><small>Python</small><small>Surface analysis</small></div></div>
+        </article>
+        <article class="experience-row" data-reveal>
+          <span class="experience-number">02</span>
+          <div class="organization-mark serelix-mark" aria-label="Serelix Robotics">SRX</div>
+          <div class="experience-title"><h3>Engineering Intern</h3><p>Serelix Robotics</p></div>
+          <p class="experience-summary">Designed a tunable 3D-printed foot interface and a nine-channel pressure-sensing PCB for a post-stroke rehabilitation exoskeleton.</p>
+          <div class="experience-meta"><span>Summer 2025</span><div><small>KiCad</small><small>PCB design</small><small>Rapid prototyping</small></div></div>
+        </article>
+        <article class="experience-row" data-reveal>
+          <span class="experience-number">03</span>
+          <div class="organization-mark city-mark" aria-label="MIT City Science">CITY<br>SCIENCE</div>
+          <div class="experience-title"><h3>UROP Researcher</h3><p>Taipei Tech × MIT City Science Lab</p></div>
+          <p class="experience-summary">Built a wheeled-bipedal robot that could dock into a quadruped, then developed its kinematics, control simulations, and power/CAN distribution board.</p>
+          <div class="experience-meta"><span>2024 — 2025</span><div><small>Robotics</small><small>Control systems</small><small>CAN bus</small></div></div>
+        </article>
       </div>
     </section>
 
-    <section id="work" class="projects-section"><div class="shell">
-      <div class="section-heading inverted"><div><span class="section-code">/ 02</span><h2>Selected systems</h2></div><p>Three threads in the work so far.</p></div>
-      <div class="project-grid">
-        <article class="project-card"><div class="project-topline"><span>A</span><span>◇</span></div><p class="project-label">Characterization</p><h3>Semiconductor reliability</h3><p>Accelerated-aging studies for power MOSFETs using source-measure units, spectroscopy, and laser profilometry—with procedures aligned to AEC-Q101.</p><div class="project-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></article>
-        <article class="project-card"><div class="project-topline"><span>B</span><span>◇</span></div><p class="project-label">Embedded systems</p><h3>Formula SAE electronics</h3><p>Electronic throttle-body control logic, validation procedures, and custom engine-dynamometer wiring for Purdue Formula SAE.</p><div class="project-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></article>
-        <article class="project-card"><div class="project-topline"><span>C</span><span>◇</span></div><p class="project-label">Mechatronics</p><h3>Competitive robotics</h3><p>Mechanical and controls integration for a specialized scoring system, plus CNC-machined drivetrain and scoring components.</p><div class="project-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></article>
+    <section id="signal-lab" class="signal-section">
+      <div class="shell">
+        <div class="section-heading inverted" data-reveal>
+          <div><span class="section-code">/ 02</span><h2>Signal lab</h2></div>
+          <p>Change the inputs and watch the system respond.</p>
+        </div>
+        <div class="lab-grid" data-reveal>
+          <div class="scope-shell">
+            <div class="scope-header"><span><i></i> OSC / CH-01</span><span>ILLUSTRATIVE SIGNAL</span></div>
+            <canvas id="signal-canvas" role="img" aria-label="Interactive illustrative signal waveform"></canvas>
+            <div class="scope-footer"><span>10 ms/div</span><span>AC coupling</span><span>sample / 1.00 GS/s</span></div>
+          </div>
+          <form class="signal-controls" onsubmit="return false">
+            <div class="control-heading"><span>CONTROL PANEL</span><b>OC-01</b></div>
+            <label for="frequency"><span>Frequency <output id="frequency-value" for="frequency">2.0 Hz</output></span><input id="frequency" type="range" min="1" max="8" step=".1" value="2"></label>
+            <label for="amplitude"><span>Amplitude <output id="amplitude-value" for="amplitude">48%</output></span><input id="amplitude" type="range" min="10" max="90" value="48"></label>
+            <label for="waveform"><span>Waveform</span><select id="waveform"><option value="sine">Sine</option><option value="square">Square</option><option value="triangle">Triangle</option></select></label>
+            <button id="signal-reset" class="reset-button" type="button">Reset signal <span aria-hidden="true">↺</span></button>
+          </form>
+        </div>
       </div>
-    </div></section>
+    </section>
+
+    <section id="work" class="projects-section">
+      <div class="shell">
+        <div class="section-heading inverted" data-reveal>
+          <div><span class="section-code">/ 03</span><h2>Selected systems</h2></div>
+          <p>Filter the archive, then open a project for the full signal path.</p>
+        </div>
+        <div class="filter-bar" data-reveal>
+          <div role="group" aria-label="Filter projects">
+            <button type="button" data-filter="all" aria-pressed="true">All</button>
+            <button type="button" data-filter="research" aria-pressed="false">Research</button>
+            <button type="button" data-filter="robotics" aria-pressed="false">Robotics</button>
+            <button type="button" data-filter="hardware" aria-pressed="false">Hardware</button>
+          </div>
+          <span id="project-count" aria-live="polite">5 projects</span>
+        </div>
+        <div class="project-grid">
+          <article class="project-card feature-card" data-category="robotics hardware" data-reveal>
+            <div class="project-image"><img src="assets/photos/robot-city.jpg" alt="Bipedal city transport robot on a test rig in the lab" width="1600" height="1200" loading="lazy"><span>A / 05</span></div>
+            <div class="project-content"><p class="project-label">Robotics · Control</p><h3>Bipedal city transport robot</h3><p>A modular wheeled-bipedal platform designed to dock into a more stable quadruped system.</p><button type="button" data-project="bipedal">Open field notes <span aria-hidden="true">↗</span></button></div>
+          </article>
+          <article class="project-card" data-category="robotics hardware" data-reveal>
+            <div class="project-image"><img src="assets/photos/robot-prototype.jpg" alt="Close-up of Owen's white bipedal robot prototype on a workbench" width="900" height="1200" loading="lazy"><span>B / 05</span></div>
+            <div class="project-content"><p class="project-label">Prototype · Mechatronics</p><h3>Bipedal prototype</h3><p>A compact build for fast iteration on geometry, actuation, electronics, and control.</p><button type="button" data-project="prototype">Open field notes <span aria-hidden="true">↗</span></button></div>
+          </article>
+          <article class="project-card cleanroom-card" data-category="research hardware" data-reveal>
+            <div class="project-image"><img src="assets/photos/cleanroom.jpg" alt="Owen Chen and a colleague in cleanroom PPE beside semiconductor imaging equipment" width="1582" height="1187" loading="lazy"><span>C / 05</span></div>
+            <div class="project-content"><p class="project-label">Characterization · Research</p><h3>Semiconductor reliability</h3><p>Accelerated-aging studies for power MOSFETs with spectroscopy and laser profilometry.</p><button type="button" data-project="semiconductor">Open field notes <span aria-hidden="true">↗</span></button></div>
+          </article>
+          <article class="project-card feature-card" data-category="robotics hardware" data-reveal>
+            <div class="project-image"><img src="assets/photos/ftc-team.jpg" alt="FTC Team 16021 Techno Maniacs with their competition robot and trophy" width="1600" height="1200" loading="lazy"><span>D / 05</span></div>
+            <div class="project-content"><p class="project-label">Competition · Leadership</p><h3>Techno Maniacs 16021</h3><p>Mechanical and controls integration for a specialized scoring system built to compete.</p><button type="button" data-project="ftc">Open field notes <span aria-hidden="true">↗</span></button></div>
+          </article>
+          <article class="project-card" data-category="hardware" data-reveal>
+            <div class="race-visual" aria-hidden="true"><span>E / 05</span><div class="race-car"></div></div>
+            <div class="project-content"><p class="project-label">Motorsport · Fabrication</p><h3>24 Hours of Lemons</h3><p>A student-built endurance racecar shaped by strict budget constraints, 3D printing, CFD, and hands-on fabrication.</p><button type="button" data-project="racecar">Open field notes <span aria-hidden="true">↗</span></button></div>
+          </article>
+        </div>
+      </div>
+    </section>
 
     <section class="section shell toolchain">
-      <div class="section-heading"><div><span class="section-code">/ 03</span><h2>Toolchain</h2></div><p>Comfortable moving between code, circuits, and physical systems.</p></div>
-      <div class="skill-marquee" aria-label="Technical skills"><span><b>01</b> Python</span><span><b>02</b> C++</span><span><b>03</b> SystemVerilog</span><span><b>04</b> MATLAB</span><span><b>05</b> KiCad</span><span><b>06</b> ROS 2</span><span><b>07</b> STM32</span><span><b>08</b> ESP32</span><span><b>09</b> LTspice</span><span><b>10</b> SolidWorks</span><span><b>11</b> MuJoCo</span><span><b>12</b> OpenCV</span></div>
-      <div class="education-card"><div><span class="education-mark">P</span><div><p>B.S. Computer Engineering</p><h3>Purdue University</h3></div></div><p>Dean’s List &amp; Semester Honors · Expected May 2028</p></div>
+      <div class="section-heading" data-reveal>
+        <div><span class="section-code">/ 04</span><h2>Toolchain</h2></div>
+        <p>Comfortable moving between code, circuits, and physical systems.</p>
+      </div>
+      <div class="logo-loop" data-reveal aria-label="Selected engineering tools">
+        <div class="logo-track">
+          <figure><img src="assets/logos/python.svg" alt=""><figcaption>Python</figcaption></figure>
+          <figure><img src="assets/logos/cplusplus.svg" alt=""><figcaption>C++</figcaption></figure>
+          <figure><img src="assets/logos/kicad.svg" alt=""><figcaption>KiCad</figcaption></figure>
+          <figure><img src="assets/logos/ros.svg" alt=""><figcaption>ROS 2</figcaption></figure>
+          <figure><img src="assets/logos/arduino.svg" alt=""><figcaption>Arduino</figcaption></figure>
+          <figure><img src="assets/logos/github.svg" alt=""><figcaption>GitHub</figcaption></figure>
+          <figure aria-hidden="true"><img src="assets/logos/python.svg" alt=""><figcaption>Python</figcaption></figure>
+          <figure aria-hidden="true"><img src="assets/logos/cplusplus.svg" alt=""><figcaption>C++</figcaption></figure>
+          <figure aria-hidden="true"><img src="assets/logos/kicad.svg" alt=""><figcaption>KiCad</figcaption></figure>
+          <figure aria-hidden="true"><img src="assets/logos/ros.svg" alt=""><figcaption>ROS 2</figcaption></figure>
+          <figure aria-hidden="true"><img src="assets/logos/arduino.svg" alt=""><figcaption>Arduino</figcaption></figure>
+          <figure aria-hidden="true"><img src="assets/logos/github.svg" alt=""><figcaption>GitHub</figcaption></figure>
+        </div>
+      </div>
+      <div class="education-card" data-reveal>
+        <div><span class="education-mark">P</span><div><p>B.S. Computer Engineering</p><h3>Purdue University</h3></div></div>
+        <p>Dean’s List &amp; Semester Honors · Expected May 2028</p>
+      </div>
     </section>
   </main>
 
-  <footer id="contact"><div class="shell footer-inner"><p class="eyebrow">Let’s make something measurable.</p><h2>Have a hard problem?</h2><a class="footer-email" href="mailto:owenchen0408@gmail.com">owenchen0408@gmail.com ↗</a><div class="footer-bottom"><span>© 2026 Owen Chen</span><div><a href="https://github.com/oweche" target="_blank" rel="noreferrer">⌘ GitHub</a><a href="https://www.linkedin.com/in/owen-chen-aab061216/" target="_blank" rel="noreferrer">◎ LinkedIn</a><a href="mailto:owenchen0408@gmail.com">✉ Email</a></div></div></div></footer>
+  <footer id="contact">
+    <div class="shell footer-inner" data-reveal>
+      <p class="eyebrow">Let’s make something measurable.</p>
+      <h2>Have a hard problem?</h2>
+      <div class="contact-actions">
+        <a class="footer-email" href="mailto:owenchen0408@gmail.com">owenchen0408@gmail.com <span aria-hidden="true">↗</span></a>
+        <button id="copy-email" type="button">Copy email</button>
+        <span id="copy-status" class="sr-only" aria-live="polite"></span>
+      </div>
+      <div class="footer-bottom"><span>© 2026 Owen Chen</span><div><a href="https://github.com/oweche" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/owen-chen-aab061216/" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="https://owenchen.org" target="_blank" rel="noreferrer">Archive ↗</a></div></div>
+    </div>
+  </footer>
+
+  <dialog id="project-dialog">
+    <button id="dialog-close" class="dialog-close" type="button" aria-label="Close project details">Close ×</button>
+    <div id="dialog-content"></div>
+  </dialog>
+
+  <template id="project-bipedal">
+    <article class="dialog-project"><p class="project-label">Taipei Tech × MIT City Science Lab</p><h2>Bipedal city transport robot</h2><img src="assets/photos/robot-city.jpg" alt="Bipedal city transport robot on a lab test rig"><div class="dialog-grid"><p>Designed and built both a prototype and a full-scale wheeled-bipedal robot with a docking mechanism that reconfigured the system into a quadruped for improved static stability.</p><ul><li>Inverse kinematics for height and pose control</li><li>LQR and MPC simulations in MuJoCo</li><li>Two-layer power and CAN-bus PCB</li><li>25% reduction in point-to-point wiring</li></ul></div></article>
+  </template>
+  <template id="project-prototype">
+    <article class="dialog-project"><p class="project-label">Fast physical iteration</p><h2>Bipedal prototype</h2><img src="assets/photos/robot-prototype.jpg" alt="Close-up of the compact bipedal robot prototype"><div class="dialog-grid"><p>The smaller platform made it possible to test mechanical proportions, motor placement, belt drives, and electronics packaging before committing to the full-scale system.</p><ul><li>Rapid 3D-printed iteration</li><li>Compact electromechanical packaging</li><li>Bench testing for mobility concepts</li></ul></div></article>
+  </template>
+  <template id="project-semiconductor">
+    <article class="dialog-project"><p class="project-label">Birck Nanotechnology Center</p><h2>Semiconductor reliability</h2><img src="assets/photos/cleanroom.jpg" alt="Owen Chen and a colleague in cleanroom PPE beside semiconductor imaging equipment"><div class="dialog-grid"><p>Developed and executed a High Temperature Gate Bias accelerated-aging protocol for onsemi power MOSFETs, aligning procedures with AEC-Q101 guidance.</p><ul><li>Keithley source-measure units</li><li>FTIR and white-light spectroscopy</li><li>VK-X3000 laser profilometry</li><li>Repeatable measurement procedures</li></ul></div></article>
+  </template>
+  <template id="project-ftc">
+    <article class="dialog-project"><p class="project-label">FIRST Tech Challenge · Team 16021</p><h2>Techno Maniacs</h2><img src="assets/photos/ftc-team.jpg" alt="FTC Team 16021 with its competition robot and trophy"><div class="dialog-grid"><p>Led the mechanical and controls integration of a drone-scoring subsystem, increasing maximum scoring capacity by about 20% and implementing Java-based actuator controls.</p><ul><li>Winning Alliance, 2024 New England Invitational</li><li>3rd Place Inspire Award, 2025 New England Invitational</li><li>CNC machining with Fusion 360 CAM</li></ul></div></article>
+  </template>
+  <template id="project-racecar">
+    <article class="dialog-project"><p class="project-label">24 Hours of Lemons · Team 50</p><h2>Student-built endurance racer</h2><div class="race-visual" aria-hidden="true"><span>TRACK SYSTEM</span><div class="race-car"></div></div><div class="dialog-grid"><p>Co-founded a student team to turn a $500 donor car, excluding safety equipment, into an endurance racer. The build connected practical fabrication with aerodynamic modeling and outreach.</p><ul><li>3D-printed components and CFD-informed aero</li><li>Raised more than $2,300 for autism in motorsports</li><li>Donated half of funds raised to an autism nonprofit</li><li>Chief of 3D engineering and outreach</li></ul></div></article>
+  </template>
 </body>
 </html>
