@@ -86,4 +86,3 @@ Rebuild the existing static GitHub Pages portfolio in place. Preserve the approv
 - Whether mobile, keyboard, reduced-motion, and JavaScript-off paths preserve all core content.
 - Whether project claims and organization branding stayed accurate.
 - Whether any legacy interaction was retained without serving the new experience.
-

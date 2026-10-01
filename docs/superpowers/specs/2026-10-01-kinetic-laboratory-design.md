@@ -91,4 +91,3 @@ Before pushing:
 - Serve locally and inspect desktop and mobile layouts plus interactive/reduced-motion paths.
 - Obtain a fresh whole-change review and resolve critical/important findings.
 - Push `main`, confirm the GitHub Pages workflow succeeds, and verify the live HTML/CSS/JS from `https://owenc.me/`.
-

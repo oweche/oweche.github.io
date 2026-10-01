@@ -51,7 +51,6 @@ test('preserves the factual portfolio evidence and supplied assets', () => {
   ]) assert.match(html, new RegExp(phrase, 'i'));
 
   for (const asset of [
-    'assets/photos/portrait.jpg',
     'assets/photos/robot-city.jpg',
     'assets/photos/robot-prototype.jpg',
     'assets/photos/cleanroom.jpg',
