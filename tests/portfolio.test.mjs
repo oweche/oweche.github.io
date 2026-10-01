@@ -69,7 +69,11 @@ test('keeps core navigation and dialogs accessible without canvas interaction', 
   assert.match(html, /id="project-dialog"[^>]+aria-labelledby=/);
   assert.match(html, /id="photo-dialog"[^>]+aria-labelledby=/);
   assert.match(html, /rel="icon"[^>]+image\/svg\+xml/);
-  assert.match(html, /href="assets\/documents\/Owen-Chen-Resume\.pdf"[^>]*>[^<]*(View )?Résumé/i);
+});
+
+test('does not publish the private resume or offer resume downloads', () => {
+  assert.equal(/(?:resume|résumé)/i.test(html), false, 'The page must not offer a private resume download');
+  assert.equal(existsSync(join(root, 'assets/documents/Owen-Chen-Resume.pdf')), false);
 });
 
 test('uses the approved visual tokens and explicit motion fallbacks', () => {
