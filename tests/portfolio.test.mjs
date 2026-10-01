@@ -70,6 +70,7 @@ test('keeps core navigation and dialogs accessible without canvas interaction', 
   assert.match(html, /id="project-dialog"[^>]+aria-labelledby=/);
   assert.match(html, /id="photo-dialog"[^>]+aria-labelledby=/);
   assert.match(html, /rel="icon"[^>]+image\/svg\+xml/);
+  assert.match(html, /href="assets\/documents\/Owen-Chen-Resume\.pdf"[^>]*>[^<]*(View )?Résumé/i);
 });
 
 test('uses the approved visual tokens and explicit motion fallbacks', () => {
@@ -81,6 +82,10 @@ test('uses the approved visual tokens and explicit motion fallbacks', () => {
   assert.match(css, /\.lab-stage/);
   assert.match(app, /visibilitychange/);
   assert.match(app, /ResizeObserver/);
+  assert.match(app, /cancelAnimationFrame/);
+  assert.match(app, /document\.hidden/);
+  assert.match(app, /devicePixelRatio[\s\S]{0,80}1\.5|1\.5[\s\S]{0,80}devicePixelRatio/);
+  assert.match(app, /classList\.add\(['"]js-reveals['"]\)/);
 });
 
 test('lab engine clamps values and normalizes pointer coordinates', () => {
@@ -110,6 +115,23 @@ test('lab engine resolves domains with a sensing fallback', () => {
   assert.equal(engine.resolveDomain('control').id, 'control');
   assert.equal(engine.resolveDomain('unknown').id, 'sensing');
   assert.match(engine.resolveDomain('fabrication').status, /prototype|physical|build/i);
+});
+
+test('lab domains point to real portfolio evidence with image metadata', () => {
+  const expected = {
+    sensing: ['#project-semiconductor-story', 'assets/photos/cleanroom.jpg'],
+    intelligence: ['#project-bipedal-story', 'assets/photos/robot-city.jpg'],
+    control: ['#project-bipedal-story', 'assets/photos/robot-city.jpg'],
+    fabrication: ['#project-prototype-story', 'assets/photos/robot-prototype.jpg'],
+  };
+  for (const [id, [link, image]] of Object.entries(expected)) {
+    const domain = engine.resolveDomain(id);
+    assert.equal(domain.projectLink, link);
+    assert.equal(domain.image, image);
+    assert.ok(domain.alt.length > 20);
+    assert.ok(domain.caption.length > 4);
+    assert.ok(domain.medium.length > 4);
+  }
 });
 
 test('all local HTML asset references resolve', () => {
